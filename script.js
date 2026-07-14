@@ -71,7 +71,49 @@ async function buscarProductoPorCodigo(codigo) {
 async function buscarPorInput() {
   const codigo = document.getElementById("codigo-barras").value.trim();
   if (!codigo) return;
+  mostrarSemaforo();
+  const producto = await buscarProductoPorCodigo(codigo);
+  if (!producto) {
+    ocultarSemaforo();
+    mostrarResultadoSimple("⚠️ No encontrado", "No se encontró ningún producto con ese código de barras.");
+    return;
+  }
+  await evaluarProducto(producto);
+}
 
+// ---- Escáner con cámara ----
+let html5QrCode = null;
+
+function abrirCamara() {
+  document.getElementById("camara-overlay").classList.add("mostrar");
+
+  html5QrCode = new Html5Qrcode("reader");
+  html5QrCode.start(
+    { facingMode: "environment" },
+    { fps: 10, qrbox: 250 },
+    (codigoDetectado) => {
+      cerrarCamara();
+      procesarCodigoEscaneado(codigoDetectado);
+    },
+    (error) => {
+      // se ejecuta todo el tiempo mientras no detecta nada, lo ignoramos
+    }
+  ).catch((err) => {
+    console.error("No se pudo abrir la cámara:", err);
+    cerrarCamara();
+    mostrarResultadoSimple("⚠️ Error de cámara", "No se pudo acceder a la cámara. Revisá los permisos del navegador.");
+  });
+}
+
+function cerrarCamara() {
+  document.getElementById("camara-overlay").classList.remove("mostrar");
+  if (html5QrCode) {
+    html5QrCode.stop().catch(() => {});
+    html5QrCode = null;
+  }
+}
+
+async function procesarCodigoEscaneado(codigo) {
   mostrarSemaforo();
 
   const producto = await buscarProductoPorCodigo(codigo);
