@@ -30,10 +30,6 @@ function enviarFormulario() {
   const experiencia = document.querySelector('.cc-form textarea');
   const toast = document.getElementById('toast');
 
-  console.log("nombre:", nombre);
-  console.log("experiencia:", experiencia);
-
-
 
   // Cambiar texto y estilo del botón
   boton.textContent = "✔ Enviado";
