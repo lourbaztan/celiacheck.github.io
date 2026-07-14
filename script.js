@@ -24,9 +24,10 @@ function cambiarTabEducativa(btn, tab) {
 }
 
 // ---- Formulario ----
-
 function enviarFormulario() {
   const boton = document.querySelector('.cc-form .cc-submit');
+  const nombre = document.querySelector('.cc-form input[type="text"]');
+  const experiencia = document.querySelector('.cc-form textarea');
   const toast = document.getElementById('toast');
 
   // Cambiar texto y estilo del botón
@@ -34,8 +35,10 @@ function enviarFormulario() {
   boton.classList.add('cc-enviado');
   boton.disabled = true;
 
+  // Limpiar los campos del formulario
+  nombre.value = "";
+  experiencia.value = "";
 
-  
   // Volver el botón a su estado original después de un tiempo
   setTimeout(() => {
     boton.textContent = "Enviar →";
@@ -43,7 +46,6 @@ function enviarFormulario() {
     boton.disabled = false;
   }, 3000);
 }
-
 
 // ---- Búsqueda de producto (Open Food Facts) ----
 async function buscarProductoPorCodigo(codigo) {
