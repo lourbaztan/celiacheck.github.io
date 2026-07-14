@@ -334,9 +334,17 @@ body {
 }
 
 .cc-form input {
+  border: none;
   border-bottom: 2px solid var(--amarillo);
+  outline: none;
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: var(--borgona);
+  padding: 0.75rem 0;
+  width: 100%;
+  box-sizing: border-box;
 }
-
 .cc-submit {
   display: inline-block;
   width: auto;
