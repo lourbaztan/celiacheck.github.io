@@ -43,7 +43,7 @@
 
     <!-- Escáner para celular -->
     <div class="cc-scan-mobile">
-      <button class="cc-scan-btn" onclick="alert('Acá vamos a abrir la cámara')">
+      <button class="cc-scan-btn" onclick="abrirCamara()">
         <i>📷</i>
         <span>Escanear código de barras</span>
       </button>
@@ -133,14 +133,15 @@
 
   <!-- FORMULARIO -->
   <section class="cc-section" style="padding-bottom: 1.5rem">
-    <p class="cc-sec-title">Contanos tu experiencia</p>
-    <div class="cc-form">
-      <input type="text" placeholder="Tu nombre">
-      <textarea placeholder="Escribí tu experiencia acá..."></textarea>
-      <button class="cc-submit" onclick="enviarFormulario()">Enviar →</button>
-    </div>
-  </section>
+  <p class="cc-sec-title">Contanos tu experiencia</p>
+  <div class="cc-form">
+    <input type="text" placeholder="Tu nombre">
+    <textarea placeholder="Escribí tu experiencia acá..."></textarea>
+    <button class="cc-submit" onclick="enviarFormulario()">Enviar →</button>
+  </div>
+</section>
 
+<p id="mensaje"></p>
   <!-- FOOTER -->
   <footer class="cc-footer">
     <div class="cc-footer-logo">Celia<em>Check</em></div>
@@ -151,6 +152,14 @@
     </div>
   </footer>
 
+</div>
+
+<!-- Escáner de cámara -->
+<div class="cc-camara-overlay" id="camara-overlay">
+  <div class="cc-camara-box">
+    <div id="reader"></div>
+    <button class="cc-submit" onclick="cerrarCamara()">Cancelar</button>
+  </div>
 </div>
 
 <!-- Semáforo -->
@@ -164,6 +173,7 @@
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
